@@ -1,11 +1,10 @@
 require 'octokit'
 
-#temp github api token: a9d65691841e987ed8fb91ad1c8cd084d82dd0e9
 class MySimpleGitApi
 
-  def self.get_bad_pr
+  def self.get_bad_pr(token)
     puts "Searching..."
-    client = Octokit::Client.new(:access_token => "a9d65691841e987ed8fb91ad1c8cd084d82dd0e9", :per_page => 300)
+    client = Octokit::Client.new(:access_token => token, :per_page => 300)
 
     end_result = []
     repo = 'rails/rails'
@@ -31,5 +30,6 @@ class MySimpleGitApi
 end
 
 if __FILE__ == $0
-  puts MySimpleGitApi.get_bad_pr
+  token = File.read("oauth_token.txt")
+  puts MySimpleGitApi.get_bad_pr(token)
 end
